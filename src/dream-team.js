@@ -22,12 +22,10 @@ function createDreamTeam( members ) {
   for(let member of members){
     if(typeof(member)==='string'){
     member = member.trim().charAt(0).toUpperCase();
-    sum+=member;}
+    sum += member;}
     counter++}
-    let name=sum.split('')
+    let name = sum.split('')
     return name.sort().join('')
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
 }
 module.exports = {
   createDreamTeam

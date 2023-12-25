@@ -15,9 +15,73 @@ const { NotImplementedError } = require('../extensions/index.js');
  * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
  *
  */
-function repeater(/* str, options */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function repeater(str, options) {
+  const part = [];
+  let fullString;
+  const {repeatTimes:repeatTimes, separator: separator, addition:addition, additionRepeatTimes:additionRepeatTimes, additionSeparator:additionSeparator} = options;
+  
+  if(addition){
+    part.push(addition);
+  }
+  
+  if(additionSeparator) {
+    part.push(additionSeparator)
+  }
+  
+  let newString = part.join('').repeat(additionRepeatTimes - 1);
+  let resultString = newString + addition;
+
+  
+ /*if(separator && !addition && !additionSeparator) {
+    fullString = ((str + separator).repeat(repeatTimes-1)) + str;
+  }else if (!separator && !addition && !additionSeparator){
+    fullString = ((str + "+").repeat(repeatTimes-1)) + str;
+  } */
+  
+  if ( repeatTimes && !separator && addition) {
+    fullString = ((str + addition + "+" ).repeat(repeatTimes-1) + str + addition);
+  }
+
+  if((!separator && addition === "ADDITION" && !additionSeparator)) {
+    let resultString1 = (addition + '|').repeat(additionRepeatTimes-1) + addition;
+    fullString = ((str +resultString1 +'+').repeat(repeatTimes-1)) + str + resultString1;
+  }else if ((!separator && addition === "ADDITION" && additionSeparator)) {
+    fullString = ((str + newString).repeat(repeatTimes-1)) + addition + '+' + str + newString + addition;
+  }
+
+  if (separator && addition !== "ADDITION" && !additionSeparator) {
+    fullString = ((str + addition + separator).repeat(repeatTimes-1)) + str + addition;
+  }else if ((separator && addition === "ADDITION" && !additionSeparator)) {
+    let resultString1 = (addition + '|').repeat(additionRepeatTimes-1) + addition;
+    fullString = ((str + resultString1 ).repeat(repeatTimes-1)) +separator + str +resultString1;
+  }
+  else if( separator && addition !== "ADDITION" && additionSeparator){
+    fullString = ((str + resultString + separator).repeat(repeatTimes - 1)) + str + resultString;
+  }/*else if (repeatTimes && separator){
+    fullString = ((str + separator).repeat(repeatTimes-1)) + str;
+  } */
+
+  if(separator && !addition && !additionSeparator) {
+    fullString = ((str + separator).repeat(repeatTimes-1)) + str;
+  }else if (!separator && !addition && !additionSeparator){
+    fullString = ((str + "+").repeat(repeatTimes-1)) + str;
+  } 
+  
+   
+  
+  /*else if(!separator){
+    let separator = '+'
+    fullString = (str + resultString + separator).repeat(repeatTimes)
+  }else if(!repeatTimes){
+    fullString = (str + addition+'!')
+  }*/
+
+  /*if(str.toLocaleUpperCase() === str){
+    fullString = (str + newString + '|').repeat(repeatTimes)
+  }*/
+
+
+  return fullString;
 }
 
 module.exports = {

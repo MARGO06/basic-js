@@ -1,4 +1,5 @@
 const { NotImplementedError } = require('../extensions/index.js');
+const { repeater } = require('./extended-repeater.js');
 
 /**
  * The MAC-48 address is six groups of two hexadecimal digits (0 to 9 or A to F),
@@ -15,13 +16,17 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function isMAC48Address( n ) {
- let str1=String(n)
- let str2=/^[0-9A-F]{2}(-[0-9A-F]{2}){5}$/
- if(str1===str2){
-  return true
- }else{
- return false
+ let str1 = String(n);
+ let arr = str1.split('-');
+ let result1;
+ for(item of arr) {
+  let result = parseInt (item,16)
+  if(arr.length = 6 && typeof result === 'number'){
+    result1 = true
+  } result1 = false
  }
+return result1
+ 
 }
 module.exports = {
   isMAC48Address

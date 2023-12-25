@@ -11,15 +11,17 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function getEmailDomain( email) {
-let arr1=email.match(/@\w+\.\w+/i);
-//let string1=arr1.toString()
-//let arr2=string1.split('');
-//arr2.shift()
-//let string2=arr2.toString()
-//let result=string2.replace(/,/g,'')
-
-return arr1
-  
+let arr = email.split('@');
+let result;
+if(arr.length === 2) {
+  let [first, second ] = arr;
+  result = second; 
+}
+ else if (arr.length === 3){
+  let [first, second,last ] = arr;
+  result = last; 
+}
+return result
 }
 
 module.exports = {
